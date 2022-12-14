@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public int score =  0;
+    public int score = 0;
     public int contador = 0;
     public Preguntas[] pregunta_test =
             {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String nombre_jugador = bundle.getString("name_usuario");
-        txtJugador.setText("Jugador: " +nombre_jugador);
+        txtJugador.setText("Jugador: " + nombre_jugador);
 
         Preguntas p1 = pregunta_test[0];
         txtPregunta.setText(p1.getPregunta());
@@ -41,26 +41,30 @@ public class MainActivity extends AppCompatActivity {
         btnVerdadero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador =+ 1;
-                score =+ 100;
-                txtPuntaje.setText(" "+ String.valueOf(score) + " ");
-                if(pregunta_test.length <= contador){
-                    Preguntas p1 = pregunta_test[contador];
-                    txtPregunta.setText(p1.getPregunta());
-                }
+                contador = +1;
+                if (p1.getRespuesta() == "verdadero")
+                    score = +100;
+                else
+                    score = -100;
+                txtPuntaje.setText(" " + String.valueOf(score) + " ");
+                Preguntas p1 = pregunta_test[contador];
+                txtPregunta.setText(p1.getPregunta());
+
             }
         });
 
         btnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador =+ 1;
-                score =- 100;
-                txtPuntaje.setText(" "+ String.valueOf(score) + " ");
-                if(pregunta_test.length <= contador) {
-                    Preguntas p1 = pregunta_test[contador];
-                    txtPregunta.setText(p1.getPregunta());
-                }
+                contador = +1;
+                if (p1.getRespuesta() == "falso")
+                    score = +100;
+                else
+                    score = -100;
+                txtPuntaje.setText(" " + String.valueOf(score) + " ");
+                Preguntas p1 = pregunta_test[contador];
+                txtPregunta.setText(p1.getPregunta());
+
             }
         });
     }
