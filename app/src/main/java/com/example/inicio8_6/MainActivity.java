@@ -41,14 +41,17 @@ public class MainActivity extends AppCompatActivity {
         btnVerdadero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador = +1;
+                // no sirve el usar estas cosas:  =+ =-
+                contador = contador + 1;
                 if (p1.getRespuesta() == "verdadero")
-                    score = +100;
+                    score = score + 100;
                 else
-                    score = -100;
+                    score = score - 100;
                 txtPuntaje.setText(" " + String.valueOf(score) + " ");
                 Preguntas p1 = pregunta_test[contador];
                 txtPregunta.setText(p1.getPregunta());
+
+                System.out.println(contador - score);
 
             }
         });
@@ -56,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         btnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador = +1;
+                contador = contador + 1;
                 if (p1.getRespuesta() == "falso")
-                    score = +100;
+                    score = score + 100;
                 else
-                    score = -100;
+                    score = score - 100;
                 txtPuntaje.setText(" " + String.valueOf(score) + " ");
                 Preguntas p1 = pregunta_test[contador];
                 txtPregunta.setText(p1.getPregunta());
