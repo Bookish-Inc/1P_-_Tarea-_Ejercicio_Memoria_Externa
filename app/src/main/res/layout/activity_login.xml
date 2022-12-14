@@ -49,14 +49,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="50dp">
+                android:paddingHorizontal="40dp">
 
                 <Button
                     android:id="@+id/txt_login"
+                    android:layout_width="124dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="Inicia Sesión" />
+
+                <Button
+                    android:id="@+id/btn_exit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Inicia Sesión" />
+                    android:text="Salir" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
