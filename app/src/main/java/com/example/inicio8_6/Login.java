@@ -26,8 +26,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-       /* Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
+       /*Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);*/
 
 
         Button btnLogin = (Button)findViewById(R.id.btn_login);
@@ -39,7 +39,11 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                Intent call_principal = new Intent(view.getContext(), MainActivity.class);
-                if(txtUsuario.getText().toString() == users[0].nombre && txtContrasenia.getText().toString() == users[0].contrasenia){
+                System.out.println(txtUsuario.getText().toString());
+                System.out.println(txtContrasenia.getText().toString());
+                System.out.println(users[0].nombre.toString());
+                System.out.println(users[0].contrasenia.toString());
+                if((txtUsuario.getText().toString().equals(users[0].nombre.toString())) && (txtContrasenia.getText().toString().equals(users[0].contrasenia.toString()))){
                     call_principal.putExtra("name_usuario", txtUsuario.getText().toString());
                     call_principal.putExtra("clave", txtContrasenia.getText().toString());
                     startActivity(call_principal);
@@ -47,6 +51,6 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
 }
