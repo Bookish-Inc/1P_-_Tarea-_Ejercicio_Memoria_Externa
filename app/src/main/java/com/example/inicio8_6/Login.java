@@ -62,10 +62,9 @@ public class Login extends AppCompatActivity {
                         call_principal.putExtra("clave", txtContrasenia.getText().toString());
                         startActivity(call_principal);
                         bandera = true;
-                        break;
+                        break; // para que salga cuando ya encuentre la respuesta
                     }
                 }
-
                 if (bandera == false) {
                     Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
                 }
