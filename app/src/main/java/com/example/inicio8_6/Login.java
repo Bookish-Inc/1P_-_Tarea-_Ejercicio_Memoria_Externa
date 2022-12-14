@@ -37,6 +37,13 @@ public class Login extends AppCompatActivity {
         txtUsuario = (EditText)findViewById(R.id.txt_nombre);
         txtContrasenia = (EditText)findViewById(R.id.txt_password);
 
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.exit(0);
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
