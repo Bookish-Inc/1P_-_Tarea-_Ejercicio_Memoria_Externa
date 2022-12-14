@@ -26,11 +26,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+       /* Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
 
         Button btnLogin = (Button)findViewById(R.id.btn_login);
+        Button btnExit = (Button)findViewById(R.id.btn_exit);
         txtUsuario = (EditText)findViewById(R.id.txt_nombre);
         txtContrasenia = (EditText)findViewById(R.id.txt_password);
 
