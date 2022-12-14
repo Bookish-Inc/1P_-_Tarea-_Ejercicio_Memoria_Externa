@@ -19,6 +19,8 @@ public class Login extends AppCompatActivity {
             {
                     new User("Helen", "1234"),
                     new User("Nefi", "1234"),
+                    new User("Renan", "1234"),
+                    new User("Vane", "1234"),
             };
 
     @Override
