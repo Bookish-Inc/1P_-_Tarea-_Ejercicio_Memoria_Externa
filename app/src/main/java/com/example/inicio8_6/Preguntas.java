@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Preguntas implements Serializable {
     public String pregunta;
-    public String respuesta;
+    public boolean respuesta;
 
-    public Preguntas(String p, String r){
+    public Preguntas(String p, boolean r){
         this.pregunta = p;
         this.respuesta = r;
     }
@@ -15,7 +15,7 @@ public class Preguntas implements Serializable {
         this.pregunta = p;
     }
 
-    public void setRespuesta(String r){
+    public void setRespuesta(boolean r){
         this.respuesta = r;
     }
 
@@ -23,7 +23,7 @@ public class Preguntas implements Serializable {
         return pregunta;
     }
 
-    public String getRespuesta(){
+    public boolean getRespuesta(){
         return respuesta;
     }
 }
