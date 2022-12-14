@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         final TextView txtPregunta = (TextView) findViewById(R.id.txt_pregunta);
         final TextView txtPuntaje = (TextView) findViewById(R.id.txt_puntaje);
 
+        Bundle bundle = getIntent().getExtras();
+        String nombre_jugador = bundle.getString("name_usuario");
+        txtJugador.setText("Jugador: " +nombre_jugador);
+
         Preguntas p1 = pregunta_test[0];
         txtPregunta.setText(p1.getPregunta());
 
