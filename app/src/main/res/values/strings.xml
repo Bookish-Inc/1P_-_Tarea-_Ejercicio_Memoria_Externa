@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Inicio8_6</string>
+    <string name="app_name">preguntas</string>
+    <string name="titulo_ventana">Juego de Preguntas del Mundial</string>
 </resources>
