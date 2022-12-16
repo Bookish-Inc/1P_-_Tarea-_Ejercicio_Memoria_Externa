@@ -28,7 +28,7 @@
             android:paddingVertical="150dp">
 
             <EditText
-                android:id="@+id/txt_nombre"
+                android:id="@+id/lbl_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

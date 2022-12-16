@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 public class Login extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class Login extends AppCompatActivity {
 
         Button btnLogin = (Button)findViewById(R.id.btn_login);
         Button btnExit = (Button)findViewById(R.id.btn_exit);
-        txtUsuario = (EditText)findViewById(R.id.txt_nombre);
+        txtUsuario = (EditText)findViewById(R.id.lbl_nombre);
         txtContrasenia = (EditText)findViewById(R.id.txt_password);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
