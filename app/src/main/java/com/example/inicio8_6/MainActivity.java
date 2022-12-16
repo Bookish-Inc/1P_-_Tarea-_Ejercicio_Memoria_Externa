@@ -10,13 +10,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public int score =  0;
+    public int score = 0;
     public int contador = 0;
+    Preguntas lastPregunta;
     public Preguntas[] pregunta_test =
             {
-                    new Preguntas("¿Nos vamos al mundial?", "falso"),
-                    new Preguntas("¿Todos pasarán la materia?", "falso"),
-                    new Preguntas("¿El examen estará difícil?", "verdadero"),
+                    new Preguntas("¿Nos vamos al mundial?", false),
+                    new Preguntas("¿Todos pasarán la materia?", false),
+                    new Preguntas("¿El examen estará difícil?", true),
             };
 
     @Override
@@ -33,35 +34,48 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String nombre_jugador = bundle.getString("name_usuario");
-        txtJugador.setText("Jugador: " +nombre_jugador);
+        txtJugador.setText("Jugador: " + nombre_jugador);
 
-        Preguntas p1 = pregunta_test[0];
-        txtPregunta.setText(p1.getPregunta());
+        lastPregunta = pregunta_test[0];
+        txtPregunta.setText(lastPregunta.getPregunta());
 
         btnVerdadero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador =+ 1;
-                score =+ 100;
-                txtPuntaje.setText(" "+ String.valueOf(score) + " ");
-                if(pregunta_test.length <= contador){
-                    Preguntas p1 = pregunta_test[contador];
-                    txtPregunta.setText(p1.getPregunta());
-                }
+                // no sirve el usar estas cosas:  =+ =-
+                contador = contador + 1;
+                if (lastPregunta.getRespuesta())
+                    score = score + 100;
+                else
+                    score = score - 100;
+                update();
+                txtPuntaje.setText(" " + score + " ");
+                txtPregunta.setText(lastPregunta.getPregunta());
+
             }
         });
 
         btnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contador =+ 1;
-                score =- 100;
-                txtPuntaje.setText(" "+ String.valueOf(score) + " ");
-                if(pregunta_test.length <= contador) {
-                    Preguntas p1 = pregunta_test[contador];
-                    txtPregunta.setText(p1.getPregunta());
-                }
+                contador = contador + 1;
+                if (!lastPregunta.getRespuesta())
+                    score = score + 100;
+                else
+                    score = score - 100;
+                update();
+                txtPuntaje.setText(" " + score + " ");
+                txtPregunta.setText(lastPregunta.getPregunta());
+
             }
         });
+    }
+
+    private void update(){
+        if (contador >= pregunta_test.length){
+            contador =0;
+            score = 0;
+        }
+        lastPregunta = pregunta_test[contador];
     }
 }

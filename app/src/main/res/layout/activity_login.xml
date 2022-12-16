@@ -32,18 +32,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Usuario"
                 android:inputType="textNoSuggestions"
-                android:minHeight="48dp"
-                android:text="Usuario" />
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textNoSuggestions"
-                android:minHeight="48dp"
-                android:text="Contraseña" />
+                android:hint="Contrasña"
+                android:inputType="textPassword"
+                android:minHeight="48dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
