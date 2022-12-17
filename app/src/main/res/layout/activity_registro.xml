@@ -49,7 +49,6 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Pancracio"
                     android:inputType="textPersonName"
                     android:maxWidth="75dp"
                     android:minHeight="48dp"
@@ -78,7 +77,6 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Rivera"
                     android:inputType="textPersonName"
                     android:maxWidth="75dp"
                     android:minHeight="48dp"
@@ -121,7 +119,6 @@
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="23"
                         android:inputType="number"
                         android:maxWidth="75dp"
                         android:minWidth="10dp"
@@ -321,6 +318,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
+                    android:onClick="onBtnRegistrar"
                     android:text="Registrar" />
 
                 <Button
@@ -329,6 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
+                    android:onClick="onBtnBorrar"
                     android:text="Borrar" />
 
                 <Button

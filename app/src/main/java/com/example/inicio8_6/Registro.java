@@ -1,6 +1,5 @@
 package com.example.inicio8_6;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,25 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Registro extends AppCompatActivity {
     String spinnerSelected = "";
     String sexo = "";
+    EditText txtNombre;
+    EditText txtApellido;
+    EditText txtEdad;
+    EditText txtTelefono;
+    EditText txtCorreo;
+    EditText txtContresenia;
+    RadioButton rbtFemenino;
+    RadioButton rbtMasculino;
+    Spinner spnrEstadoCivil;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        List<String> estadoCivilList = Arrays.asList("Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)","Casi algo","MejorAmigo", "Solo es un amigo");
+        init();
+        List<String> estadoCivilList = Arrays.asList("    ","Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)","Casi algo","MejorAmigo", "Solo es un amigo");
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, estadoCivilList));
@@ -43,10 +52,20 @@ public class Registro extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    private void init(){
+        txtNombre = (EditText) findViewById(R.id.txt_nombre);
+        txtApellido = (EditText) findViewById(R.id.txt_apellido);
+        txtEdad = (EditText) findViewById(R.id.txt_edad);
+        txtTelefono = (EditText) findViewById(R.id.txt_telefono);
+        txtCorreo = (EditText) findViewById(R.id.txt_correo);
+        txtContresenia = (EditText) findViewById(R.id.txt_contrasenia);
+        rbtFemenino = (RadioButton) findViewById(R.id.rdb_femenino);
+        rbtMasculino = (RadioButton) findViewById(R.id.rdb_masculino);
+        spnrEstadoCivil = (Spinner) findViewById(R.id.spinner);
+
+    }
     public void onRadioClickButtom(View view) {
         RadioButton buttomR = ((RadioButton) view);
         if (!buttomR.isChecked()) {
@@ -61,6 +80,26 @@ public class Registro extends AppCompatActivity {
         }
     }
 
+
+    public void onBtnRegistrar(View v){
+        //Mostrar mensaje de usuario registrado
+        Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onBtnBorrar(View v){
+        Boolean valor= false;
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEdad.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtContresenia.setText("");
+        rbtFemenino.setChecked(false);
+        rbtMasculino.setChecked(false);
+        spnrEstadoCivil.setSelection(0);
+
+    }
+
     public void onBtnCancelar(View v){
         //Mensaje
         Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
@@ -68,19 +107,4 @@ public class Registro extends AppCompatActivity {
         Intent call_login = new Intent(v.getContext(), Login.class);
         startActivity(call_login);
     }
-
-    /*       Button btnRegistrar = (Button) findViewById(R.id.btn_registrar);
-        Button btnBorrar = (Button) findViewById(R.id.btn_borrar);
-        Button btnCancelar = (Button) findViewById(R.id.btn_cancelar);
-
-        //Boton cancelar envia a Log in
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
-                Intent call_login = new Intent(v.getContext(), Login.class);
-                startActivity(call_login);
-            }
-        });*/
 }
