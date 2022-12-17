@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
 
         Button btnLogin = (Button) findViewById(R.id.btn_login);
         Button btnExit = (Button) findViewById(R.id.btn_exit);
-        txtUsuario = (EditText) findViewById(R.id.txt_nombre);
+        txtUsuario = (EditText) findViewById(R.id.lbl_nombre);
         txtContrasenia = (EditText) findViewById(R.id.txt_password);
 
         btnExit.setOnClickListener(new View.OnClickListener() {
@@ -49,15 +49,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean bandera = false;
-                Intent call_principal = new Intent(view.getContext(), MainActivity.class);
-                //System.out.println(txtUsuario.getText().toString());
-                //System.out.println(txtContrasenia.getText().toString());
-                //System.out.println(users[0].nombre.toString());
-                //System.out.println(users[0].contrasenia.toString());
-                //System.out.println("users.length = " + users.length);
-                for (int i = 0; i < users.length; i = i + 1) {
-                    System.out.println("users.length = " + users.length + "\n Nombre: " + users[i].nombre+ "\n Contraseña: " + users[i].contrasenia);
-                    if ((txtUsuario.getText().toString().equals(users[i].nombre.toString())) && (txtContrasenia.getText().toString().equals(users[i].contrasenia.toString()))) {
+                Intent call_principal = new Intent(view.getContext(), Registro.class);
+                for (User user : users) {
+                    System.out.println("users.length = " + users.length + "\n Nombre: " + user.nombre + "\n Contraseña: " + user.contrasenia);
+                    if ((txtUsuario.getText().toString().equals(user.nombre)) && (txtContrasenia.getText().toString().equals(user.contrasenia))) {
                         call_principal.putExtra("name_usuario", txtUsuario.getText().toString());
                         call_principal.putExtra("clave", txtContrasenia.getText().toString());
                         startActivity(call_principal);
@@ -65,7 +60,7 @@ public class Login extends AppCompatActivity {
                         break; // para que salga cuando ya encuentre la respuesta
                     }
                 }
-                if (bandera == false) {
+                if (!bandera) {
                     Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
                 }
             }
