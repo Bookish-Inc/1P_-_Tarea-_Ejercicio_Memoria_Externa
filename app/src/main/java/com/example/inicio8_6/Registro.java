@@ -1,11 +1,14 @@
 package com.example.inicio8_6;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +42,9 @@ public class Registro extends AppCompatActivity {
 
             }
         });
+
+
+
     }
 
     public void onRadioClickButtom(View view) {
@@ -54,4 +60,27 @@ public class Registro extends AppCompatActivity {
             sexo = "Femenino";
         }
     }
+
+    public void onBtnCancelar(View v){
+        //Mensaje
+        Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
+        //Llamar a Log in
+        Intent call_login = new Intent(v.getContext(), Login.class);
+        startActivity(call_login);
+    }
+
+    /*       Button btnRegistrar = (Button) findViewById(R.id.btn_registrar);
+        Button btnBorrar = (Button) findViewById(R.id.btn_borrar);
+        Button btnCancelar = (Button) findViewById(R.id.btn_cancelar);
+
+        //Boton cancelar envia a Log in
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
+                Intent call_login = new Intent(v.getContext(), Login.class);
+                startActivity(call_login);
+            }
+        });*/
 }
