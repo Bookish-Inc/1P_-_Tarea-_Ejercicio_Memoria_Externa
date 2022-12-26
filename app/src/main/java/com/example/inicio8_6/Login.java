@@ -41,6 +41,8 @@ public class Login extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishAffinity(); // Close all activities in queue
+                finish();
                 System.exit(0);
             }
         });
