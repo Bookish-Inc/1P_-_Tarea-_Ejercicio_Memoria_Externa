@@ -10,10 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
 
 public class Login extends AppCompatActivity {
 
@@ -76,11 +73,10 @@ public class Login extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item, View v){
+    public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.btnAcerca:
-                //Llamar a Acerca de
-                Intent call = new Intent(v.getContext(), AcercaDe.class);
+            case R.id.btn_acerca:
+                Intent call = new Intent(this, AcercaDe.class);
                 startActivity(call);
             default:
                 return super.onOptionsItemSelected(item);

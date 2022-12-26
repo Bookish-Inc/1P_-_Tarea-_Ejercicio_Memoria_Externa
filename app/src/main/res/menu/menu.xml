@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/btnAcerca"
+        android:id="@+id/btn_acerca"
         android:icon="@android:drawable/ic_dialog_info"
         android:iconTint="#2196F3"
         android:title="Acerca de" />
