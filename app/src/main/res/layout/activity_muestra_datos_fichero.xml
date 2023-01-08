@@ -17,6 +17,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contenido del archivo"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
         <EditText
             android:id="@+id/txt_mostrar"
             android:layout_width="match_parent"

@@ -136,6 +136,7 @@ public class Registro extends AppCompatActivity {
         if (status == 0) {
             try {
                 File f = new File(getExternalFilesDir(null), "registroBookish.txt");
+                System.out.println("Archivo guardado: "+ f.getAbsolutePath());
                 OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f, true));
                 info = txtNombre.getText().toString() + ";" + txtApellido.getText().toString() + ";" +
                         sexo + ";" + spinnerSelected + ";" + txtEdad.getText().toString() + ";" +
@@ -170,15 +171,15 @@ public class Registro extends AppCompatActivity {
     public void RecuperarDatosFichero(View v) {
         String nomarchivo = "registroBookish.txt";
         File tarjeta = Environment.getExternalStorageDirectory();
-        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+        File file = new File(getExternalFilesDir(null), nomarchivo);
         try {
-
+            System.out.println("FileExiste <----------------------------"  + file.getAbsolutePath());
             if (file.exists()) {
                 try (BufferedReader input = new BufferedReader(new FileReader(file))) {
                     String line;
                     String datos = "";
                     while ((line = input.readLine()) != null) {
-                        datos = line.replace(";", " ");
+                        datos = line.replace(";", "\n");
                     }
                     //Llamar a pantalla activity_muestra_datos_fichero
                     Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);

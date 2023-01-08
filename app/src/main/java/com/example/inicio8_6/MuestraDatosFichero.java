@@ -16,10 +16,10 @@ public class MuestraDatosFichero extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muestra_datos_fichero);
 
-        // txtMostrar = (EditText) findViewById(R.id.txt_mostrar);
+        txtMostrar = (EditText) findViewById(R.id.txt_mostrar);
         Bundle bundle = getIntent().getExtras();
         String texto = bundle.getString("textoFichero");
-        txtMostrar.setText("AQUI VA DATOS FICHERO");
+        txtMostrar.setText(texto);
     }
 
     public void onBtnRegresar(View v){
