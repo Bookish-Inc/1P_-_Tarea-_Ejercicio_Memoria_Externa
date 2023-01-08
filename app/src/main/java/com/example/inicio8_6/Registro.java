@@ -136,8 +136,7 @@ public class Registro extends AppCompatActivity {
         if (status == 0) {
             try {
                 File f = new File(getExternalFilesDir(null), "registroBookish.txt");
-                System.out.println("Archivo guardado: "+ f.getAbsolutePath());
-                OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f, true));
+                OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f));
                 info = txtNombre.getText().toString() + ";" + txtApellido.getText().toString() + ";" +
                         sexo + ";" + spinnerSelected + ";" + txtEdad.getText().toString() + ";" +
                         txtTelefono.getText().toString() + ";" + txtCorreo.getText().toString() + ";" +
