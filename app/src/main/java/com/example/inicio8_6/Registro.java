@@ -169,8 +169,8 @@ public class Registro extends AppCompatActivity {
 
     public void RecuperarDatosFichero(View v) {
         String tarjeta = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String pathDir = tarjeta + "/Android/data/com.example.Inicio8_6";
-        File file = new File(tarjeta + File.separator + pathDir);
+        String pathDir = tarjeta + "/Android/data/com.example.inicio8_6/files/registroBookish.txt";
+        File file = new File(pathDir);
         Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
         try {
             FileInputStream fIn = new FileInputStream(file);
@@ -178,9 +178,12 @@ public class Registro extends AppCompatActivity {
             BufferedReader br = new BufferedReader(archivo);
             String linea = br.readLine();
             String datos = "";
-            while (linea != null) {
-                datos = linea.replace(";", " ");
+            while (linea != null) { // bucle infinito: linea = br.readLine()
+                    //datos = linea.replace(";", " ");
+                    datos = datos + linea.replace(";", " ") + "\n";
+                    linea = br.readLine();
             }
+            
             br.close();
             archivo.close();
             //Llamar a pantalla activity_muestra_datos_fichero
