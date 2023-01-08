@@ -168,28 +168,24 @@ public class Registro extends AppCompatActivity {
     }
 
     public void RecuperarDatosFichero(View v) {
-        String nomarchivo = "registroBookish.txt";
-        File tarjeta = Environment.getExternalStorageDirectory();
-        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+        File file = new File(getExternalFilesDir(null), "registroBookish");
+        Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
         try {
-
-            if (file.exists()) {
-                try (BufferedReader input = new BufferedReader(new FileReader(file))) {
-                    String line;
-                    String datos = "";
-                    while ((line = input.readLine()) != null) {
-                        datos = line.replace(";", " ");
-                    }
-                    //Llamar a pantalla activity_muestra_datos_fichero
-                    Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
-                    call_mostrar.putExtra("textoFichero", datos);
-                    startActivity(call_mostrar);
-                }
+            FileInputStream fIn = new FileInputStream(file);
+            InputStreamReader archivo = new InputStreamReader((fIn));
+            BufferedReader br = new BufferedReader(archivo);
+            String linea = br.readLine();
+            String datos = "";
+            while (linea != null) {
+                datos = linea.replace(";", " ");
             }
-
-
+            br.close();
+            archivo.close();
+            //Llamar a pantalla activity_muestra_datos_fichero
+            call_mostrar.putExtra("textoFichero", datos);
+            startActivity(call_mostrar);
         } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "No se encontró el archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No se pudo leer", Toast.LENGTH_SHORT).show();
         }
     }
 }
