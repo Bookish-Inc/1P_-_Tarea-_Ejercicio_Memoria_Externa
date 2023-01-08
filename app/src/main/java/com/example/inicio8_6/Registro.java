@@ -168,11 +168,12 @@ public class Registro extends AppCompatActivity {
     }
 
     public void RecuperarDatosFichero(View v) {
-        File file = new File(getExternalFilesDir(null), "registroBookish");
+        File tarjeta = Environment.getExternalStorageDirectory();
+        File file = new File(tarjeta.getAbsolutePath(), "registroBookish.txt");
         Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
         try {
             FileInputStream fIn = new FileInputStream(file);
-            InputStreamReader archivo = new InputStreamReader((fIn));
+            InputStreamReader archivo = new InputStreamReader(fIn);
             BufferedReader br = new BufferedReader(archivo);
             String linea = br.readLine();
             String datos = "";
@@ -185,7 +186,7 @@ public class Registro extends AppCompatActivity {
             call_mostrar.putExtra("textoFichero", datos);
             startActivity(call_mostrar);
         } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "No se pudo leer", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No se encontró el archivo", Toast.LENGTH_SHORT).show();
         }
     }
 }
