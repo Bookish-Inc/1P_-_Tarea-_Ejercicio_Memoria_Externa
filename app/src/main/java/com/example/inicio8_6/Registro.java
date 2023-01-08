@@ -168,8 +168,9 @@ public class Registro extends AppCompatActivity {
     }
 
     public void RecuperarDatosFichero(View v) {
-        File tarjeta = Environment.getExternalStorageDirectory();
-        File file = new File(tarjeta.getAbsolutePath(), "registroBookish.txt");
+        String tarjeta = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String pathDir = tarjeta + "/Android/data/com.example.Inicio8_6";
+        File file = new File(tarjeta + File.separator + pathDir);
         Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
         try {
             FileInputStream fIn = new FileInputStream(file);
