@@ -1,9 +1,23 @@
+/*Considerando la tarea creada sobre formularios se deberá:
+
+Almacenar los datos del registro en formato txt. Cada campo puede separarlos con ;
+Recuperar los datos registrados en el archivo mediante el click del boton respectivo.
+Podrá mostrarlo sobre alguna ventana adicional y/o según convenga al grupo.
+En ningun caso podrá usar el Toast para mostrar dichos datos recuperados.
+
+Deberá enviar un archivo PDF con el código legible (en caso que no esté legible, no tendrá toda la calificación), capture de las diferentes pantallas para demostrar el funcionamiento de lo requerido.
+
+Nota: Deberá agregar al archivo el Link del video donde se muestre el funcionamiento de la actividad.
+*/
+
 package com.example.inicio8_6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +26,9 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -106,5 +123,50 @@ public class Registro extends AppCompatActivity {
         //Llamar a Log in
         Intent call_login = new Intent(v.getContext(), Login.class);
         startActivity(call_login);
+    }
+
+    public void GuardarFichero(View v){
+        int status = verificarStatus();
+        String info;
+        if(status == 0)
+        {
+            try{
+                File f = new File(getExternalFilesDir(null),"registroBookish.txt");
+                OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f,true));
+                info = txtNombre.getText().toString()+";"+txtApellido.getText().toString()+";"+
+                        sexo+";"+spinnerSelected+";"+txtEdad.getText().toString()+";"+
+                        txtTelefono.getText().toString()+";"+txtCorreo.getText().toString()+";"+
+                        txtContresenia.getText().toString()+"\n";
+                fout.write(info);
+                fout.close();
+                Toast.makeText(getApplicationContext(), "Archivo guardado con éxito", Toast.LENGTH_SHORT).show();
+            }catch(Exception ex){
+                Log.e("Ficheros","Error al escribir generar el fichero");
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No se puede guardar", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public int verificarStatus(){
+        String estado = Environment.getExternalStorageState();
+        if(estado.equals(Environment.MEDIA_MOUNTED))
+        {
+            Toast.makeText(getApplicationContext(), "Montado SD", Toast.LENGTH_SHORT).show();
+            return 0;
+        }
+        else if(estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY))
+        {
+            Toast.makeText(getApplicationContext(), "Montado solo lectura", Toast.LENGTH_SHORT).show();
+            return 1;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está montado", Toast.LENGTH_SHORT).show();
+            return 2;
+        }
     }
 }
