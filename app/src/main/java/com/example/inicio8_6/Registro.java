@@ -30,6 +30,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -50,13 +51,12 @@ public class Registro extends AppCompatActivity {
     Spinner spnrEstadoCivil;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         init();
-        List<String> estadoCivilList = Arrays.asList("    ","Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)","Casi algo","MejorAmigo", "Solo es un amigo");
+        List<String> estadoCivilList = Arrays.asList("    ", "Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)", "Casi algo", "MejorAmigo", "Solo es un amigo");
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, estadoCivilList));
@@ -75,7 +75,7 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    private void init(){
+    private void init() {
         txtNombre = (EditText) findViewById(R.id.txt_nombre);
         txtApellido = (EditText) findViewById(R.id.txt_apellido);
         txtEdad = (EditText) findViewById(R.id.txt_edad);
@@ -87,6 +87,7 @@ public class Registro extends AppCompatActivity {
         spnrEstadoCivil = (Spinner) findViewById(R.id.spinner);
 
     }
+
     public void onRadioClickButtom(View view) {
         RadioButton buttomR = ((RadioButton) view);
         if (!buttomR.isChecked()) {
@@ -102,13 +103,13 @@ public class Registro extends AppCompatActivity {
     }
 
 
-    public void onBtnRegistrar(View v){
+    public void onBtnRegistrar(View v) {
         //Mostrar mensaje de usuario registrado
-        Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Estimado " + txtNombre.getText() + " " + txtApellido.getText() + " su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
     }
 
-    public void onBtnBorrar(View v){
-        Boolean valor= false;
+    public void onBtnBorrar(View v) {
+        Boolean valor = false;
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
@@ -121,7 +122,7 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    public void onBtnCancelar(View v){
+    public void onBtnCancelar(View v) {
         //Mensaje
         Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
         //Llamar a Log in
@@ -129,75 +130,65 @@ public class Registro extends AppCompatActivity {
         startActivity(call_login);
     }
 
-    public void GuardarFichero(View v){
+    public void GuardarFichero(View v) {
         int status = verificarStatus();
         String info;
-        if(status == 0)
-        {
-            try{
-                File f = new File(getExternalFilesDir(null),"registroBookish.txt");
-                OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f,true));
-                info = txtNombre.getText().toString()+";"+txtApellido.getText().toString()+";"+
-                        sexo+";"+spinnerSelected+";"+txtEdad.getText().toString()+";"+
-                        txtTelefono.getText().toString()+";"+txtCorreo.getText().toString()+";"+
-                        txtContresenia.getText().toString()+"\n";
+        if (status == 0) {
+            try {
+                File f = new File(getExternalFilesDir(null), "registroBookish.txt");
+                OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(f, true));
+                info = txtNombre.getText().toString() + ";" + txtApellido.getText().toString() + ";" +
+                        sexo + ";" + spinnerSelected + ";" + txtEdad.getText().toString() + ";" +
+                        txtTelefono.getText().toString() + ";" + txtCorreo.getText().toString() + ";" +
+                        txtContresenia.getText().toString() + "\n";
                 fout.write(info);
                 fout.close();
                 Toast.makeText(getApplicationContext(), "Archivo guardado con éxito", Toast.LENGTH_SHORT).show();
-            }catch(Exception ex){
-                Log.e("Ficheros","Error al escribir generar el fichero");
+            } catch (Exception ex) {
+                Log.e("Ficheros", "Error al escribir generar el fichero");
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(getApplicationContext(), "No se puede guardar", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public int verificarStatus(){
+    public int verificarStatus() {
         String estado = Environment.getExternalStorageState();
-        if(estado.equals(Environment.MEDIA_MOUNTED))
-        {
+        if (estado.equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(getApplicationContext(), "Montado SD", Toast.LENGTH_SHORT).show();
             return 0;
-        }
-        else if(estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY))
-        {
+        } else if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
             Toast.makeText(getApplicationContext(), "Montado solo lectura", Toast.LENGTH_SHORT).show();
             return 1;
-        }
-        else
-        {
+        } else {
             Toast.makeText(getApplicationContext(), "No está montado", Toast.LENGTH_SHORT).show();
             return 2;
         }
     }
 
-    public void RecuperarDatosFichero(View v){
+    public void RecuperarDatosFichero(View v) {
         String nomarchivo = "registroBookish.txt";
         File tarjeta = Environment.getExternalStorageDirectory();
         File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
         try {
-            FileInputStream fIn = new FileInputStream(file);
-            InputStreamReader archivo=new InputStreamReader(fIn);
-            BufferedReader br=new BufferedReader(archivo);
-            String linea=br.readLine();
-            String todo="";
-            while (linea!=null)
-            {
-                todo=todo+linea+"\n";
-                linea=br.readLine();
-            }
-            br.close();
-            archivo.close();
-            //Llamar a pantalla activity_muestra_datos_fichero
-            Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
-            call_mostrar.putExtra("textoFichero", todo);
-            startActivity(call_mostrar);
 
-        } catch (IOException e)
-        {
+            if (file.exists()) {
+                try (BufferedReader input = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    String datos = "";
+                    while ((line = input.readLine()) != null) {
+                        datos = line.replace(";", " ");
+                    }
+                    //Llamar a pantalla activity_muestra_datos_fichero
+                    Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
+                    call_mostrar.putExtra("textoFichero", datos);
+                    startActivity(call_mostrar);
+                }
+            }
+
+
+        } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "No se encontró el archivo", Toast.LENGTH_SHORT).show();
         }
     }
