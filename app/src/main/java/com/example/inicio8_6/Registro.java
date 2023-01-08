@@ -183,7 +183,7 @@ public class Registro extends AppCompatActivity {
                     datos = datos + linea.replace(";", " ") + "\n";
                     linea = br.readLine();
             }
-            
+
             br.close();
             archivo.close();
             //Llamar a pantalla activity_muestra_datos_fichero
