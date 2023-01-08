@@ -26,8 +26,12 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -167,6 +171,34 @@ public class Registro extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), "No está montado", Toast.LENGTH_SHORT).show();
             return 2;
+        }
+    }
+
+    public void RecuperarDatosFichero(View v){
+        String nomarchivo = "registroBookish.txt";
+        File tarjeta = Environment.getExternalStorageDirectory();
+        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+        try {
+            FileInputStream fIn = new FileInputStream(file);
+            InputStreamReader archivo=new InputStreamReader(fIn);
+            BufferedReader br=new BufferedReader(archivo);
+            String linea=br.readLine();
+            String todo="";
+            while (linea!=null)
+            {
+                todo=todo+linea+"\n";
+                linea=br.readLine();
+            }
+            br.close();
+            archivo.close();
+            //Llamar a pantalla activity_muestra_datos_fichero
+            Intent call_mostrar = new Intent(v.getContext(), MuestraDatosFichero.class);
+            call_mostrar.putExtra("textoFichero", todo);
+            startActivity(call_mostrar);
+
+        } catch (IOException e)
+        {
+            Toast.makeText(getApplicationContext(), "No se encontró el archivo", Toast.LENGTH_SHORT).show();
         }
     }
 }

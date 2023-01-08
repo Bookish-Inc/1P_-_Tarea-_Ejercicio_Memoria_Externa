@@ -348,17 +348,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="100dp">
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btn_Fichero"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:width="50dp"
                         android:onClick="GuardarFichero"
                         android:text="Guardar Archivo" />
+
+                    <Button
+                        android:id="@+id/btn_Recuperar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_weight="1"
+                        android:width="50dp"
+                        android:onClick="RecuperarDatosFichero"
+                        android:text="Recuperar Archivo" />
+
                 </LinearLayout>
 
             </LinearLayout>
